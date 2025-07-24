@@ -7,9 +7,13 @@ import { Link } from 'react-router-dom'
 const Card = (props) =>  {
 
   const [count, setCount] = useState(0)
-  const updateCount = () => {
+  const updateCount = async (event) => {
+    event.preventDefault()
+    await supabase.from('Posts').update({ betCount: count + 1})
+    .eq('id', [props.id])
     setCount((count) => count + 1)
   }
+  
 
   return (
       <div className="Card">
